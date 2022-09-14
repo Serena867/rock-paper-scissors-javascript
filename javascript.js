@@ -19,7 +19,7 @@ function getComputerChoice(){
 }
 
 function getUserChoice(){
-    let userChoice = parseInt(prompt("Please make a choice: Rock, Paper, or Scissors"))
+    let userChoice = prompt("Please make a choice: Rock, Paper, or Scissors")
     userChoice = userChoice.toLowerCase()
     let userResult = -1
     switch (userChoice){
@@ -38,7 +38,7 @@ function getUserChoice(){
             break;
     }
     console.log("Your choice: " + userChoice)
-    return result;
+    return userResult;
 }
 
 function compareChoices(playerChoice, computerChoice) {
