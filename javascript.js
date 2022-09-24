@@ -1,3 +1,6 @@
+let playerWinCount = 0;
+let computerWinCount = 0;
+
 function getComputerChoice(){
     let result = Math.floor(Math.random() * 3)
     let resultName = ""
@@ -18,8 +21,8 @@ function getComputerChoice(){
     return result
 }
 
-function getUserChoice(){
-    let userChoice = prompt("Please make a choice: Rock, Paper, or Scissors")
+function getUserChoice(str){
+    let userChoice = str;
     userChoice = userChoice.toLowerCase()
     let userResult = -1
     switch (userChoice){
@@ -33,6 +36,8 @@ function getUserChoice(){
             userResult = 2
             break;
         default:
+            console.clear()
+            userResult = -1
             alert("Invalid choice or incorrect spelling")
             getUserChoice()
             break;
@@ -47,20 +52,52 @@ function compareChoices(playerChoice, computerChoice) {
     } else if (playerChoice === 0){
         if (computerChoice === 1){
             console.log("The computer wins this round")
+            computerWinCount += 1;
         } else {
             console.log("You win this round")
+            playerWinCount +=1;
         }
     } else if (playerChoice === 1){
         if (computerChoice === 2) {
             console.log("The computer wins this round")
+            computerWinCount += 1;
         } else {
             console.log("You win this round")
+            playerWinCount +=1;
         }
     } else {
         if (computerChoice === 0){
             console.log("The computer wins this round")
+            computerWinCount += 1;
         } else {
             console.log("You win this round")
+            playerWinCount +=1;
         }
     }
+    document.getElementById('resultsContainer').textContent = 'Player score: ' + playerWinCount + '\n' + 'Computer Score: ' + computerWinCount;
 }
+
+function game(){
+    let numOfGames = parseInt(prompt("How many games would you like to play?"))
+    for (let i = 0; i < numOfGames; i++){
+        compareChoices()
+    }
+}
+
+const results = document.querySelector('#results');
+
+const resultContainer = document.createElement('div')
+resultContainer.setAttribute('id', 'resultsContainer');
+//resultContainer.style.cssText = 'border-style: solid';
+resultContainer.textContent = 'Player score: ' + playerWinCount + '\n' + 'Computer Score: ' + computerWinCount;
+results.appendChild(resultContainer);
+
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(compareChoices(getUserChoice(button.id), getComputerChoice()));
+        
+    });
+});
